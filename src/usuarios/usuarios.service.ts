@@ -11,12 +11,18 @@ export class UsuariosService {
     private usersRepository: Repository<Usuario>,
   ) {}
 
-  create(createUsuarioDto: CreateUsuarioDto) {
-    return 'This action adds a new usuario';
+  async create(createUsuarioDto: CreateUsuarioDto) {
+    try{
+      let querySql = `CALL insert_usuario('${createUsuarioDto.pass}', '${createUsuarioDto.nombreusuario}','${createUsuarioDto.fechacreacion}','${createUsuarioDto.mail}',${createUsuarioDto.rol})`
+      return (await this.usersRepository.query(querySql))[0][0];
+    } 
+    catch(e){
+      return -1;
+    }
   }
 
-  findAll() {
-    return this.usersRepository.query('CALL `battlenet`.`get_usuarios`()')
+  async findAll() {
+    return  (await this.usersRepository.query('CALL `battlenet`.`get_usuarios`()'))[0]
     //return `This action returns all usuarios`;
   }
 

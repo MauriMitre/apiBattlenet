@@ -12,7 +12,7 @@ export class UsuariosController {
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     return this.usuariosService.findAll();
   }
 
