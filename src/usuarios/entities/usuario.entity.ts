@@ -4,13 +4,4 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 export class Usuario {
   @PrimaryGeneratedColumn()
   id: number;
-
-  @Column()
-  firstName: string;
-
-  @Column()
-  lastName: string;
-
-  @Column({ default: true })
-  isActive: boolean;
 }

@@ -1,0 +1,25 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_puntuacion`(in JUEGO_ID INT, IN USUARIO_ID INT, IN FECHAHORA DATETIME, IN LIKETYPE INT)
+BEGIN
+	DECLARE likes int;
+        
+	INSERT INTO `battlenet`.`puntuaciones`
+	(`juego_id`,`usuario_id`,`fechahora`,`liketype`)
+	VALUES
+	(JUEGO_ID,USUARIO_ID,FECHAHORA,LIKETYPE);
+
+    IF LIKETYPE = 1 THEN
+    
+      SELECT `like` from juegos where juegos.juegoid = JUEGO_ID INTO likes;
+	  SET likes = likes + 1;
+      UPDATE juegos SET `like`=likes where juegos.juegoid = JUEGO_ID;
+	
+	END IF;
+     IF LIKETYPE = 2 THEN
+    
+      SELECT `dislike` from juegos where juegos.juegoid = JUEGO_ID INTO likes;
+	  SET likes = likes + 1;
+      UPDATE juegos SET `dislike`=likes where juegos.juegoid = JUEGO_ID;
+	
+	END IF;
+    
+END
