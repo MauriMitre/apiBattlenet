@@ -12,7 +12,7 @@ import { Juego } from './juegos/entities/juego.entity';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'Digicone444',
+      password: 'Pedrula123',
       database: 'battlenet',
       entities: [Usuario, Juego],
     }),

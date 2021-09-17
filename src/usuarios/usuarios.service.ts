@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateDescuentoDto } from './dto/create-descuento.dto';
-import { CreateJuegoDto } from './dto/create-juego.dto';
+import { CreateDescuentoDto } from '../juegos/dto/create-descuento.dto';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { CreateNotificacionDto } from './dto/create_notificacion.dto';
 import { Usuario } from './entities/usuario.entity';
@@ -17,16 +16,6 @@ export class UsuariosService {
   async create(createUsuarioDto: CreateUsuarioDto) {
     try{
       let querySql = `CALL insert_usuario('${createUsuarioDto.pass}', '${createUsuarioDto.nombreusuario}','${createUsuarioDto.fechacreacion}','${createUsuarioDto.mail}',${createUsuarioDto.rol})`
-      return (await this.usersRepository.query(querySql))[0][0];
-    } 
-    catch(e){
-      return -1;
-    }
-  }
-
-  async createJuego(createJuegoDto: CreateJuegoDto) {
-    try{
-      let querySql = `CALL insert_juego('${createJuegoDto.nombre}', '${createJuegoDto.descripcion}',${createJuegoDto.like},${createJuegoDto.dislike},${createJuegoDto.creadorid},${createJuegoDto.precio})`
       return (await this.usersRepository.query(querySql))[0][0];
     } 
     catch(e){

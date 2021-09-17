@@ -22,8 +22,14 @@ export class JuegosService {
       throw new Error(e)
     }
   }
-  create(createJuegoDto: CreateJuegoDto) {
-    return 'This action adds a new juego';
+  async createJuego(createJuegoDto: CreateJuegoDto) {
+    try{
+      let querySql = `CALL insert_juego('${createJuegoDto.nombre}', '${createJuegoDto.descripcion}',${createJuegoDto.like},${createJuegoDto.dislike},${createJuegoDto.creadorid},${createJuegoDto.precio})`
+      return (await this.usersRepository.query(querySql))[0][0];
+    } 
+    catch(e){
+      return -1;
+    }
   }
 
   findAll() {

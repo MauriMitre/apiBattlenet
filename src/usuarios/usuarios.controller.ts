@@ -1,8 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { UsuariosService } from './usuarios.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
-import { CreateJuegoDto } from './dto/create-juego.dto';
-import { CreateDescuentoDto } from './dto/create-descuento.dto';
+import { CreateDescuentoDto } from '../juegos/dto/create-descuento.dto';
 
 @Controller('usuarios')
 export class UsuariosController {
@@ -13,10 +12,6 @@ export class UsuariosController {
     return this.usuariosService.create(createUsuarioDto);
   }
 
-  @Post()
-  createJuego(@Body() createJuegoDto: CreateJuegoDto) {
-    return this.usuariosService.createJuego(createJuegoDto);
-  }
 
   @Post()
   createDescuento(@Body() createDescuentoDto: CreateDescuentoDto) {

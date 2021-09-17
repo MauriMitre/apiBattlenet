@@ -7,10 +7,10 @@ import { CreatePuntuacionDto } from './dto/create-puntuacion.dto';
 export class JuegosController {
   constructor(private readonly juegosService: JuegosService) {}
 
-  @Post()
+  @Post('/juego')
   create(@Body() createJuegoDto: CreateJuegoDto) {
     console.log("cvv")
-    return this.juegosService.create(createJuegoDto);
+    return this.juegosService.createJuego(createJuegoDto);
   }
 
   @Post('/puntuar')
