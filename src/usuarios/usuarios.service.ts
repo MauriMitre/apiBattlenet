@@ -22,8 +22,6 @@ export class UsuariosService {
     }
   }
 
-  
-
   async createNotificacion(createNotificacionDto: CreateNotificacionDto) {
     try{
       let querySql = `CALL insert_notificacion('${createNotificacionDto.mensaje}','${createNotificacionDto.fecha_publicacion}')`

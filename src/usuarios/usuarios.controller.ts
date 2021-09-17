@@ -11,9 +11,6 @@ export class UsuariosController {
     return this.usuariosService.create(createUsuarioDto);
   }
 
-
- 
-
   @Get()
   async findAll() {
     return this.usuariosService.findAll();
