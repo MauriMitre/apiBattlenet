@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { JuegosService } from './juegos.service';
 import { CreateJuegoDto } from './dto/create-juego.dto';
 import { CreatePuntuacionDto } from './dto/create-puntuacion.dto';
+import { CreateDescuentoDto } from './dto/create-descuento.dto';
 
 @Controller('juegos')
 export class JuegosController {
@@ -19,15 +20,20 @@ export class JuegosController {
     console.log("entra", JSON.stringify(createPuntuacionDto));
     return this.juegosService.puntuar(createPuntuacionDto);
   }
+  
+  @Post('/descuento')
+  createDescuento(@Body() createDescuentoDto: CreateDescuentoDto) {
+    return this.juegosService.createDescuento(createDescuentoDto);
+  }
 
   @Get()
   findAll() {
-    return "get de juegos";
+    return this.juegosService.findAll();
   }
 
-  @Get('/puntuar')
+  @Get(':id')
   findOne(@Param('id') id: string) {
-    return "puntuar";
+    return this.juegosService.findOne(+id);
   }
 
 

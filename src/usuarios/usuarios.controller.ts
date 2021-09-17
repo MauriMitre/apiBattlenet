@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { UsuariosService } from './usuarios.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
-import { CreateDescuentoDto } from '../juegos/dto/create-descuento.dto';
 
 @Controller('usuarios')
 export class UsuariosController {
@@ -13,10 +12,7 @@ export class UsuariosController {
   }
 
 
-  @Post()
-  createDescuento(@Body() createDescuentoDto: CreateDescuentoDto) {
-    return this.usuariosService.createDescuento(createDescuentoDto);
-  }
+ 
 
   @Get()
   async findAll() {
@@ -28,10 +24,11 @@ export class UsuariosController {
     return this.usuariosService.findOne(+id);
   }
 
-  @Get()
-  async findAllJuegos() {
-    return this.usuariosService.findAllJuegos();
+  @Get('/compras:id')
+  findComprasUsuario(@Param('id') id: string) {
+    return this.usuariosService.findComprasUsuario(+id);
   }
+
   
 /*
   @Patch(':id')

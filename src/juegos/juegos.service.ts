@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { CreateDescuentoDto } from './dto/create-descuento.dto';
 import { CreateJuegoDto } from './dto/create-juego.dto';
 import { CreatePuntuacionDto } from './dto/create-puntuacion.dto';
 import { Juego } from './entities/juego.entity';
@@ -22,6 +23,7 @@ export class JuegosService {
       throw new Error(e)
     }
   }
+
   async createJuego(createJuegoDto: CreateJuegoDto) {
     try{
       let querySql = `CALL insert_juego('${createJuegoDto.nombre}', '${createJuegoDto.descripcion}',${createJuegoDto.like},${createJuegoDto.dislike},${createJuegoDto.creadorid},${createJuegoDto.precio})`
@@ -31,13 +33,24 @@ export class JuegosService {
       return -1;
     }
   }
+  
+    async createDescuento(createDescuentoDto: CreateDescuentoDto) {
+      try{
+        let querySql = `CALL insert_descuento(${createDescuentoDto.juego_id},${createDescuentoDto.notificacion_id},,${createDescuentoDto.coeficiente})`
+        return (await this.usersRepository.query(querySql))[0][0];
+      } 
+      catch(e){
+        return -1;
+      }
+    }
 
-  findAll() {
-    return `This action returns all juegos`;
+  async findAll() { 
+      return  (await this.usersRepository.query('CALL `battlenet`.`get_juegos`()'))
+      //return `This action returns all juegos`; 
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} juego`;
+  async findOne(id: number) {
+    return  (await this.usersRepository.query('CALL `battlenet`.`get_juegos`()'))[0]
   }
 
 

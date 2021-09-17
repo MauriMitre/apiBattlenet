@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateDescuentoDto } from '../juegos/dto/create-descuento.dto';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { CreateNotificacionDto } from './dto/create_notificacion.dto';
 import { Usuario } from './entities/usuario.entity';
@@ -23,15 +22,7 @@ export class UsuariosService {
     }
   }
 
-  async createDescuento(createDescuentoDto: CreateDescuentoDto) {
-    try{
-      let querySql = `CALL insert_descuento(${createDescuentoDto.juego_id},${createDescuentoDto.notificacion_id},,${createDescuentoDto.coeficiente})`
-      return (await this.usersRepository.query(querySql))[0][0];
-    } 
-    catch(e){
-      return -1;
-    }
-  }
+  
 
   async createNotificacion(createNotificacionDto: CreateNotificacionDto) {
     try{
@@ -52,10 +43,10 @@ export class UsuariosService {
     return (await this.usersRepository.query('CALL `battlenet`.`get_usuario`()'))[0]
   }
 
-  async findAllJuegos() {
-    return  (await this.usersRepository.query('CALL `battlenet`.`get_juegos`()'))[0]
-    //return `This action returns all juegos`;
+  async findComprasUsuario(id: number) {
+    return (await this.usersRepository.query('CALL `battlenet`.`get_comprsa_usuario`()'))[0]
   }
+
   
 /*
   update(id: number, updateUsuarioDto: UpdateUsuarioDto) {
